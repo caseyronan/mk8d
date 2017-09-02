@@ -23,14 +23,27 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 var compiler = webpack(webpackConfig)
 
+// var devMiddleware = require('webpack-dev-middleware')(compiler, {
+//   publicPath: webpackConfig.output.publicPath,
+//   quiet: true
+// })
+
+
 var devMiddleware = require('webpack-dev-middleware')(compiler, {
   publicPath: webpackConfig.output.publicPath,
-  quiet: true
+  watch: true,
+  stats: {
+    colors: true,
+    chunks: false
+  },
+  watchOptions: {
+    aggregateTimeout: 300,
+    poll: 1000,
+  }
 })
 
 var hotMiddleware = require('webpack-hot-middleware')(compiler, {
-  log: false,
-  heartbeat: 2000
+  heartbeat: 5000
 })
 // force page reload when html-webpack-plugin template changes
 compiler.plugin('compilation', function (compilation) {
