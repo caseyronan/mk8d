@@ -452,9 +452,13 @@ export default {
     },
 
     isFilteredOut(num) {
+      if (!this.pointFilter) {
       if (this.filteredOut.includes(num)) {
         return true
-      }
+        }
+      } else {
+        return false
+        }
     },
 
     getOrientationChange(event) {
@@ -891,7 +895,7 @@ $speedColor : rgb(0,240,0)
 
 #driver-slider
   user-select:none
-  margin-top: 40px
+  margin-top: 30px
 
 .dr-chart
   user-select: none
