@@ -10,13 +10,3 @@ export default Bar.extend({
     this.renderChart(this.chartData, this.options)
   }
 })
-
-// // LineChart.js
-// import { Line } from 'vue-chartjs'
-//
-// export default Line.extend({
-//   props: ['data', 'options'],
-//   mounted () {
-//     this.renderChart(this.data, this.options)
-//   }
-// })

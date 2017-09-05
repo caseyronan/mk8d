@@ -3,11 +3,15 @@
 
     <driver-chart></driver-chart>
 
+    <!-- <hr> -->
+    <!-- <body-chart></body-chart> -->
+
   </div>
 </template>
 
 <script>
-import DriverChart from './DriverChart';
+import DriverChart from './DriverChart'
+import BodyChart from './BodyChart'
 
 export default {
   name: 'home',
@@ -18,11 +22,11 @@ export default {
   },
   components: {
     'driver-chart' : DriverChart,
+    'body-chart' : BodyChart,
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="sass" scoped>
 @import '../mq'
 
