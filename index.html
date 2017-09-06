@@ -11,13 +11,12 @@
   <body onload="ShowInfo()">
     <div id="app"></div>
     <!-- built files will be auto injected -->
-    <div class="section" id="paypal" style="visibility:hidden">
+    <div class="section" id="footer" style="visibility:hidden; margin-top:20px">
       <div class="container has-text-centered">
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
         <input type="hidden" name="cmd" value="_s-xclick">
         <input type="hidden" name="hosted_button_id" value="G99DSJ8K9UZLS">
         <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-        <!-- <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1"> -->
       </form>
       <br>
       <p>made with ☕ by <a href="mailto:caseyronan@gmail.com">ronan casey</a></p>
@@ -37,7 +36,7 @@
   ga('send', 'pageview');
 
     function ShowInfo(){
-      document.getElementById('paypal').style.visibility="visible";
+      document.getElementById('footer').style.visibility="visible";
     }
   </script>
   </body>

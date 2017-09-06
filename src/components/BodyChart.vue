@@ -1,7 +1,16 @@
 <template>
+
+
 <div class="BodyChart">
 
-<!--
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
   <vue-slider id="sld"
   v-model="bodySpeed"
   event-type="auto"
@@ -32,22 +41,22 @@
   :label-style='{marginTop:"5px"}'
   :label-active-style="null">
 </vue-slider>
- -->
 
+<!--
  <vue-slider ref="slider" v-bind="groundSpeedOptions" v-model="groundSpeedOptions.value"
  ></vue-slider>
 
  Window width: {{ windowWidth }}
  <br> Window height: {{ windowHeight }}
+-->
 
-<!--
   <template class="" v-for="body in bodiesList">
       <a v-if="body.bodyType==0" class="button is-small is-primary" style="margin:5px">{{ body.name }}</a>
       <a v-if="body.bodyType==1" class="button is-small is-info" style="margin:5px">{{ body.name }}<span v-if="body.driftsIn">*</span></a>
       <a v-if="body.bodyType==2" class="button is-small is-danger" style="margin:5px">{{ body.name }}
       </a>
   </template>
- -->
+
  <br>
  <br>
  <br>

@@ -1,12 +1,10 @@
 <template>
   <div id="app">
-    <div class="section">
-      <div class="container">
+        <div class="section">
+          <div class="container">
         <router-view></router-view>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -32,8 +30,12 @@ export default {
 @import '../node_modules/bulma/bulma.sass'
 @import 'mq'
 
+html
+  height: 100%
+
 body
   background-color: #f9f9f9
+  min-height: 100%
 
 .section
   padding: 2rem 1rem
