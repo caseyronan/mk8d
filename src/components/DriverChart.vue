@@ -37,7 +37,8 @@
     </div>
   </transition>
 
-  <driver-slider ref="slider" id="driver-slider" v-model="drSizeFilter" :real-time="true" :height="14" :dot-size="26" :min="1" :max="16" :piecewise-label="true" :bg-style='{backgroundColor:"#e0e0e0"}' :process-style='{backgroundColor:"#FFDB4A"}'>
+  <driver-slider ref="slider" id="driver-slider" v-model="drSizeFilter" v-bind="options">
+  <!-- <driver-slider ref="slider" id="driver-slider" v-model="drSizeFilter" :real-time="true" :height="14" :dot-size="26" :min="1" :max="16" :piecewise-label="true" :bg-style='{backgroundColor:"#e0e0e0"}' :process-style='{backgroundColor:"#FFDB4A"}'> -->
     <template slot="label" scope="label">
         <div class="driver-slider-label has-text-centered">
           <span v-if="!isFilteredOut(label.label)">
@@ -340,6 +341,27 @@ export default {
       ANTI_GRAVITY_HANDLING_COLOR: 'rgb(223, 204, 116)',
       MINI_TURBO_COLOR: 'rgb(255, 26, 47)',
       pointFilter: false,
+
+    //   :real-time="true" :height="14" :dot-size="26" :min="1" :max="16" :piecewise-label="true" >
+
+      options: [
+        {
+          height: 14,
+          dotSize: 26,
+          min: 1,
+          max: 16,
+          speed: 0.25,
+          realTime: true,
+          tooltip: "always",
+          piecewiseLabel: true,
+          processStyle : {'backgroundColor' : '#FFDB4A'},
+          sliderStyle : {'backgroundColor' : '#fff'},
+          bgStyle : {'backgroundColor' : '#e0e0e0'},
+        }
+      ],
+
+      pointFilterSliderColor: '#e0e0e0',
+      rangeFilterSliderColor: '#FFDB4A',
       showDetailedStats: false,
       filteredOut: [],
       showDriverDropdown: false,
@@ -406,7 +428,6 @@ export default {
         new Driver("Heavy", 16, "Morton", "https://www.mariowiki.com/images/thumb/4/47/MK8DX_Morton_Icon.png/30px-MK8DX_Morton_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.5, 2.5, 2, 2.5, 2.5, 3, 2.75),
         new Driver("Heavy", 16, "Mii (heavy)", "https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.5, 2.5, 2, 2.5, 2.5, 3, 2.75),
       ],
-
     }
   },
 
@@ -492,6 +513,14 @@ export default {
 
     toggleFilterType() {
       this.pointFilter = !this.pointFilter;
+      if (this.pointFilter){
+        this.options[0].processStyle.backgroundColor = this.pointFilterSliderColor;
+        this.options[0].sliderStyle.backgroundColor = this.rangeFilterSliderColor;
+      } else {
+        this.options[0].processStyle.backgroundColor = this.rangeFilterSliderColor;
+        this.options[0].sliderStyle.backgroundColor = '#fff';
+      }
+      this.$refs.slider.refresh()
     },
     allDrivers() {
       this.drSizeFilter = [1, 16]
