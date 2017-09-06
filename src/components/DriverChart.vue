@@ -263,13 +263,12 @@
 
   <!-- Driver chart buttons -->
   <div>
-    <!-- <a class="button dr-size-btn is-small is-success" @click="allDrivers">All</a> -->
     <a class="button dr-size-btn is-small is-info" @click="lightDrivers">Light</a>
     <a class="button dr-size-btn is-small is-primary" @click="mediumDrivers">Medium</a>
     <a class="button dr-size-btn is-small is-danger" @click="heavyDrivers">Heavy</a>
     <span>|</span>
-    <a class="button dr-size-btn is-small is-dark is-outlined" @click="changeChartType()">Type</a>
-    <a class="button dr-size-btn is-small is-dark is-outlined" @click="toggleFilterType()">Mode</a>
+    <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="changeChartType()">Type</a>
+    <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="toggleFilterType()">Mode</a>
     <a class="button dr-size-btn is-small is-warning" v-if="this.filteredOut.length > 0 && !this.pointFilter" @click="ResetFilteredOut()">Reset</a>
   </div>
 
