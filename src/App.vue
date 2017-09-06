@@ -36,6 +36,6 @@ body
   background-color: #f9f9f9
 
 .section
-  padding: 3.5rem 1.2rem
+  padding: 2rem 1rem
 
 </style>

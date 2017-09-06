@@ -1,6 +1,7 @@
 <template>
 <div class="driver">
 
+
   <bar-chart class="dr-chart" v-if="this.chartType==='bar'" :height="250" :chart-data="DrawChart[0]" :options="DrawChart[1]">
   </bar-chart>
 
@@ -16,6 +17,10 @@
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WEIGHT_COLOR }" v-bind:class="{ hidden:this.hideWeight }" @click="ToggleData(3)">Weight</a>
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingGround }" @click="ToggleData(4)">Handling</a>
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.TRACTION_COLOR }" v-bind:class="{ hidden:this.hideTraction }" @click="ToggleData(5)">Traction</a>
+    <a class="stat-btn is-small" style="border:0; color:#b3b3b3; background-color: #f9f9f9; padding:0 2px 0 2px" @click="toggleDetailedStats()">
+      <span v-if="this.showDetailedStats" class="icon"><i class="fa fa-search-minus" aria-hidden="true"></i></span>
+      <span v-else class="icon"><i class="fa fa-search-plus" aria-hidden="true"></i></span>
+    </a>
   </div>
 
   <transition name="slide-fade">
@@ -258,31 +263,14 @@
 
   <!-- Driver chart buttons -->
   <div>
-    <a class="button dr-size-btn is-success" @click="allDrivers">All</a>
-    <a class="button dr-size-btn is-info" @click="lightDrivers">Light</a>
-    <a class="button dr-size-btn is-primary" @click="mediumDrivers">Medium</a>
-    <a class="button dr-size-btn is-danger" @click="heavyDrivers">Heavy</a>
-  </div>
-
-  <div style="margin-top: 10px;">
-    <a class="button dr-chart-btn is-outlined" @click="changeChartType()">
-      <span class="icon"><i class="fa fa-line-chart" aria-hidden="true"></i></span>
-      <!-- <span> Type</span> -->
-    </a>
-    <a class="button dr-chart-btn is-outlined" @click="toggleDetailedStats()">
-      <span v-if="this.showDetailedStats" class="icon"><i class="fa fa-search-minus" aria-hidden="true"></i></span>
-      <span v-else class="icon"><i class="fa fa-search-plus" aria-hidden="true"></i></span>
-      <!-- <span> Stats</span> -->
-    </a>
-    <a class="button dr-chart-btn is-outlined" @click="toggleFilterType()">
-      <span v-if="this.pointFilter" class="icon"><i class="fa fa-link" aria-hidden="true"></i></span>
-      <span v-else class="icon"><i class="fa fa-unlink" aria-hidden="true"></i></span>
-      <!-- <span> Mode</span> -->
-    </a>
-    <a class="button dr-chart-btn is-outlined" v-if="this.filteredOut.length > 0 && !this.pointFilter" @click="ResetFilteredOut()">
-      <span class="icon"><i class="fa fa-refresh" aria-hidden="true"></i></span>
-      <!-- <span> Reset</span> -->
-    </a>
+    <!-- <a class="button dr-size-btn is-small is-success" @click="allDrivers">All</a> -->
+    <a class="button dr-size-btn is-small is-info" @click="lightDrivers">Light</a>
+    <a class="button dr-size-btn is-small is-primary" @click="mediumDrivers">Medium</a>
+    <a class="button dr-size-btn is-small is-danger" @click="heavyDrivers">Heavy</a>
+    <span>|</span>
+    <a class="button dr-size-btn is-small is-dark is-outlined" @click="changeChartType()">Type</a>
+    <a class="button dr-size-btn is-small is-dark is-outlined" @click="toggleFilterType()">Mode</a>
+    <a class="button dr-size-btn is-small is-warning" v-if="this.filteredOut.length > 0 && !this.pointFilter" @click="ResetFilteredOut()">Reset</a>
   </div>
 
 </div>
@@ -295,7 +283,6 @@ import vueSlider from 'vue-slider-component'
 import * as firebase from "firebase"
 
 // Initialize Firebase
-
 var config = {
   apiKey: "AIzaSyBEYQ1HTm719W8jkIuT6Tbo9Bb5KuQodMQ",
   authDomain: "mk8d-test.firebaseapp.com",
@@ -891,8 +878,6 @@ export default {
 <style lang="sass" scoped>
 @import '../mq'
 
-$speedColor : rgb(0,240,0)
-
 #driver-slider
   user-select:none
   margin-top: 30px
@@ -974,15 +959,15 @@ $speedColor : rgb(0,240,0)
 
 .dr-chart-btn
   font-size: 0.8rem
-  padding: 12px
-  color: slategrey
+  padding: 18px
+  color: #aeaeae
   background-color: #f9f9f9
   border: 2px solid
 
 .dr-size-btn
-  font-size: 0.8rem
-  padding-left: 8px
-  padding-right: 8px
+  font-size: 0.66rem
+  padding-left: 6px
+  padding-right: 6px
 
 .toolTipDriver
   color: #fff
@@ -998,7 +983,6 @@ $speedColor : rgb(0,240,0)
 
 .is-heavy-bg
   background-color: $heavy
-
 
 .driver-slider-label
   margin-top: 25px
