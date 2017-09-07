@@ -1,48 +1,12 @@
 <template>
-
-
 <div class="BodyChart">
 
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <vue-slider id="sld" v-model="bodySpeed" event-type="auto" :height="20" :dot-size="24" :min="-1" :max="1" :interval="0.25" :show="true" :speed="0.5" :disabled="false" :piecewise="false" :piecewise-label="true" :piecewise-style="null" :tooltip='"always"'
+    tooltip-dir="top" :reverse="false" :data="null" :clickable="true" :real-time="true" :lazy="false" :formatter="null" :bg-style='{backgroundColor:"#D5D5D5"}' :slider-style="null" :process-style='{backgroundColor:"#FFDB4A"}' :piecewise-active-style="null"
+    :tooltip-style="null" :label-style='{marginTop:"5px"}' :label-active-style="null">
+  </vue-slider>
 
-  <vue-slider id="sld"
-  v-model="bodySpeed"
-  event-type="auto"
-  :height="20"
-  :dot-size="24"
-  :min="-1"
-  :max="1"
-  :interval="0.25"
-  :show="true"
-  :speed="0.5"
-  :disabled="false"
-  :piecewise="false"
-  :piecewise-label="true"
-  :piecewise-style="null"
-  :tooltip='"always"'
-  tooltip-dir="left"
-  :reverse="false"
-  :data="null"
-  :clickable="true"
-  :real-time="true"
-  :lazy="false"
-  :formatter="null"
-  :bg-style='{backgroundColor:"#D5D5D5"}'
-  :slider-style="null"
-  :process-style='{backgroundColor:"#FFDB4A"}'
-  :piecewise-active-style="null"
-  :tooltip-style="null"
-  :label-style='{marginTop:"5px"}'
-  :label-active-style="null">
-</vue-slider>
-
-<!--
+  <!--
  <vue-slider ref="slider" v-bind="groundSpeedOptions" v-model="groundSpeedOptions.value"
  ></vue-slider>
 
@@ -57,22 +21,12 @@
       </a>
   </template>
 
- <br>
- <br>
- <br>
- <br>
- <br>
- <br>
-<br>
-<a class="button" @click="doStuff()">do stuff</a>
 </div>
 </template>
 
 
 
 <script>
-
-
 class Body {
   constructor(bodyType, driftsIn, name, speedGround, speedWater, speedAir, speedAntiGravity, acceleration, weight, handlingGround, handlingWater, handlingAir, handlingAntiGravity, traction, miniTurbo) {
     this.bodyType = bodyType,
@@ -99,11 +53,11 @@ import vueSlider from 'vue-slider-component';
 export default {
   name: 'BodyChart',
   components: {
-    'vue-slider' : vueSlider,
+    'vue-slider': vueSlider,
   },
   data() {
     return {
-      groundSpeedOptions:{
+      groundSpeedOptions: {
         value: 100,
         width: "100%",
         height: 18,
@@ -115,7 +69,7 @@ export default {
         tooltip: "always",
         formatter: "¥{value}",
         sliderStyle: {
-          "backgroundColor" : "gold"
+          "backgroundColor": "gold"
         },
         bgStyle: {
           "backgroundColor": "#ddd",
@@ -184,28 +138,28 @@ export default {
     }
   },
   mounted() {
-  this.$nextTick(function() {
-    window.addEventListener('resize', this.getWindowWidth);
-    window.addEventListener('resize', this.getWindowHeight);
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      window.addEventListener('resize', this.getWindowHeight);
 
-    //Init
-    this.getWindowWidth()
-    this.getWindowHeight()
-  })
+      //Init
+      this.getWindowWidth()
+      this.getWindowHeight()
+    })
 
-},
+  },
   methods: {
     getWindowWidth(event) {
-        this.windowWidth = document.documentElement.clientWidth;
-        this.$refs.slider.refresh();
-      },
+      this.windowWidth = document.documentElement.clientWidth;
+      this.$refs.slider.refresh();
+    },
 
-      getWindowHeight(event) {
-        this.windowHeight = document.documentElement.clientHeight;
-        this.$refs.slider.refresh();
-      },
+    getWindowHeight(event) {
+      this.windowHeight = document.documentElement.clientHeight;
+      this.$refs.slider.refresh();
+    },
 
-    doStuff(){
+    doStuff() {
       // console.log(this.$refs.slider.getValue()[0])
 
     },
@@ -216,11 +170,12 @@ export default {
       this.bodyHandling = [-1, 1];
       this.bodyTraction = [-1, 1];
 
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.getWindowWidth);
+      window.removeEventListener('resize', this.getWindowHeight);
+    },
   },
-  beforeDestroy() {
-  window.removeEventListener('resize', this.getWindowWidth);
-  window.removeEventListener('resize', this.getWindowHeight);
-},},
   computed: {
 
 
@@ -235,8 +190,6 @@ export default {
     },
   },
 }
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

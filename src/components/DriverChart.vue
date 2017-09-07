@@ -17,7 +17,7 @@
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WEIGHT_COLOR }" v-bind:class="{ hidden:this.hideWeight }" @click="ToggleData(3)">Weight</a>
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingGround }" @click="ToggleData(4)">Handling</a>
     <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.TRACTION_COLOR }" v-bind:class="{ hidden:this.hideTraction }" @click="ToggleData(5)">Traction</a>
-    <a class="stat-btn is-small" style="border:0; color:#b3b3b3; background-color: #f9f9f9; padding:0 2px 0 2px" @click="toggleDetailedStats()">
+    <a class="stat-btn is-small" style="border:0; color:#b3b3b3; background-color: #f9f9f9; padding:0 2px 0 2px; box-shadow:none;" @click="toggleDetailedStats()">
       <span v-if="this.showDetailedStats" class="icon"><i class="fa fa-search-minus" aria-hidden="true"></i></span>
       <span v-else class="icon"><i class="fa fa-search-plus" aria-hidden="true"></i></span>
     </a>
@@ -615,7 +615,6 @@ export default {
         maintainAspectRatio: false,
         legend: {
           display: false,
-
         },
         scales: {
           yAxes: [{
@@ -964,6 +963,9 @@ export default {
   border: 2px solid #f9f9f9 !important
   background-color: #f9f9f9
   color: #b3b3b3
+  box-shadow: 0 0 0 !important
+  transform: translateY(2px)
+
 
 .stat-btn
   font-size: 0.7rem
@@ -971,6 +973,7 @@ export default {
   margin: 2px
   border-radius: 2px
   border: 2px solid
+  box-shadow: 0px 2px 5px rgba(0,0,0,0.2)
 
 .driver-thumbs
   margin-top: 30px
