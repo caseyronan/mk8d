@@ -1,6 +1,6 @@
 # mk8d
 
-> A Vue.js project
+> A powerful and easy to use stat viewer for Mario Kart 8 Deluxe on the Nintendo Switch.
 
 ## Build Setup
 

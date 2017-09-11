@@ -38,6 +38,6 @@ body
   min-height: 100%
 
 .section
-  padding: 2rem 1rem
+  padding: 2.5rem 1rem
 
 </style>

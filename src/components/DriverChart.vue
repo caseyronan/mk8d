@@ -1,45 +1,45 @@
 <template>
 <div class="driver">
 
-
-  <bar-chart class="dr-chart" v-if="this.chartType==='bar'" :height="250" :chart-data="DrawChart[0]" :options="DrawChart[1]">
+  <!-- Three chart types -->
+  <bar-chart class="dr-chart" v-if="this.chartType==='bar'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
   </bar-chart>
-
-  <line-chart class="dr-chart" v-if="this.chartType==='line'" :height="250" :chart-data="DrawChart[0]" :options="DrawChart[1]">
+  <line-chart class="dr-chart" v-if="this.chartType==='line'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
   </line-chart>
-
-  <stacked-chart class="dr-chart" v-if="this.chartType==='stacked'" :height="250" :chart-data="DrawChart[0]" :options="DrawChart[1]">
+  <stacked-chart class="dr-chart" v-if="this.chartType==='stacked'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
   </stacked-chart>
 
+  <!-- Basic driver stats -->
   <div class="driver-stats">
-    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedGround }" @click="ToggleData(1)">Speed</a>
-    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ACCELERATION_COLOR }" v-bind:class="{ hidden:this.hideAcceleration }" @click="ToggleData(2)">Acceleration</a>
-    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WEIGHT_COLOR }" v-bind:class="{ hidden:this.hideWeight }" @click="ToggleData(3)">Weight</a>
-    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingGround }" @click="ToggleData(4)">Handling</a>
-    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.TRACTION_COLOR }" v-bind:class="{ hidden:this.hideTraction }" @click="ToggleData(5)">Traction</a>
+    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedGround }" @click="toggleData(1)">Speed</a>
+    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ACCELERATION_COLOR }" v-bind:class="{ hidden:this.hideAcceleration }" @click="toggleData(2)">Acceleration</a>
+    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WEIGHT_COLOR }" v-bind:class="{ hidden:this.hideWeight }" @click="toggleData(3)">Weight</a>
+    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingGround }" @click="toggleData(4)">Handling</a>
+    <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.TRACTION_COLOR }" v-bind:class="{ hidden:this.hideTraction }" @click="toggleData(5)">Traction</a>
     <a class="stat-btn is-small" style="border:0; color:#b3b3b3; background-color: #f9f9f9; padding:0 2px 0 2px; box-shadow:none;" @click="toggleDetailedStats()">
       <span v-if="this.showDetailedStats" class="icon"><i class="fa fa-search-minus" aria-hidden="true"></i></span>
       <span v-else class="icon"><i class="fa fa-search-plus" aria-hidden="true"></i></span>
     </a>
   </div>
 
+  <!-- Detailed driver stats with a snazzy transition effect -->
   <transition name="slide-fade">
     <div class="driver-stats-detailed" v-if="this.showDetailedStats">
       <div class="stat-box">
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WATER_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedWater }" @click="ToggleData(6)">Water Speed</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.AIR_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedAir }" @click="ToggleData(7)">Air Speed</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ANTI_GRAVITY_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedAntiGravity }" @click="ToggleData(8)">Anti-Gravity Speed</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WATER_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingWater }" @click="ToggleData(9)">Water Handling</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.AIR_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingAir }" @click="ToggleData(10)">Air Handling</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ANTI_GRAVITY_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingAntiGravity }" @click="ToggleData(11)">Anti-Gravity Handling</a>
-        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.MINI_TURBO_COLOR }" v-bind:class="{ hidden:this.hideMiniTurbo }" @click="ToggleData(12)">Mini-Turbo</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WATER_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedWater }" @click="toggleData(6)">Water Speed</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.AIR_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedAir }" @click="toggleData(7)">Air Speed</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ANTI_GRAVITY_SPEED_COLOR }" v-bind:class="{ hidden:this.hideSpeedAntiGravity }" @click="toggleData(8)">Anti-Gravity Speed</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.WATER_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingWater }" @click="toggleData(9)">Water Handling</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.AIR_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingAir }" @click="toggleData(10)">Air Handling</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.ANTI_GRAVITY_HANDLING_COLOR }" v-bind:class="{ hidden:this.hideHandlingAntiGravity }" @click="toggleData(11)">Anti-Gravity Handling</a>
+        <a class="button stat-btn is-small" v-bind:style="{ borderColor: this.MINI_TURBO_COLOR }" v-bind:class="{ hidden:this.hideMiniTurbo }" @click="toggleData(12)">Mini-Turbo</a>
       </div>
     </div>
   </transition>
 
+  <!-- Slider for easy filtering -->
   <driver-slider ref="slider" id="driver-slider" v-model="drSizeFilter" v-bind="options">
-    <!-- <driver-slider ref="slider" id="driver-slider" v-model="drSizeFilter" :real-time="true" :height="14" :dot-size="26" :min="1" :max="16" :piecewise-label="true" :bg-style='{backgroundColor:"#e0e0e0"}' :process-style='{backgroundColor:"#FFDB4A"}'> -->
-    <template slot="label" scope="label">
+    <template slot="label" scope="label"> <!-- Custom color coded labels -->
         <div class="driver-slider-label has-text-centered">
           <span v-if="!isFilteredOut(label.label)">
             <span v-if="label.label < 7" class="lightLabelDriver">{{ label.label }}</span>
@@ -49,234 +49,236 @@
           <span v-else style="color:#e0e0e0">{{ label.label }}</span>
         </div>
       </template>
-<template slot="tooltip" scope="tooltip">
-        <div class="has-text-centered">
-          <span v-if="tooltip.value < 7" class="is-light-bg toolTipDriver">{{tooltip.value}}</span>
-          <span v-if="tooltip.value >= 7 && tooltip.value < 12" class="is-medium-bg toolTipDriver">{{tooltip.value}}</span>
-          <span v-if="tooltip.value >= 12" class="is-heavy-bg toolTipDriver">{{tooltip.value}}</span>
-         </div>
-      </template>
-<br>
-</driver-slider>
+    <template slot="tooltip" scope="tooltip"> <!-- Custom color coded tooltips -->
+      <div class="has-text-centered">
+        <span v-if="tooltip.value < 7" class="is-light-bg toolTipDriver">{{tooltip.value}}</span>
+        <span v-if="tooltip.value >= 7 && tooltip.value < 12" class="is-medium-bg toolTipDriver">{{tooltip.value}}</span>
+        <span v-if="tooltip.value >= 12" class="is-heavy-bg toolTipDriver">{{tooltip.value}}</span>
+     </div>
+    </template>
+    <br>
+  </driver-slider>
 
-<div class="driver-thumbs">
-  <div class="driver-thumbs-row">
-    <a class="thumbVisible" @click="SelectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
+  <!-- Hard coded to get flex working, sorry all you DRY peeps -->
+  <div class="driver-thumbs">
+    <div class="driver-thumbs-row">  <!-- 1st (top) row -->
+      <a class="thumbVisible" @click="selectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
           <img src="https://www.mariowiki.com/images/thumb/3/3d/MK8_BabyPeach_Icon.png/32px-MK8_BabyPeach_Icon.png" title= "Baby Peach">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
+      <a class="thumbVisible" @click="selectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
           <img src="https://www.mariowiki.com/images/thumb/0/09/MK8_BabyRosalina_Icon.png/32px-MK8_BabyRosalina_Icon.png" title="Baby Rosalina">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(3) " v-bind:class="{ thumbHidden: filterDriver(3) }">
+      <a class="thumbVisible" @click="selectDriver(3) " v-bind:class="{ thumbHidden: filterDriver(3) }">
           <img src="https://www.mariowiki.com/images/thumb/5/51/MK8DX_Baby_Mario_Icon.png/32px-MK8DX_Baby_Mario_Icon.png" title="Baby Mario">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
+      <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
           <img src="https://www.mariowiki.com/images/thumb/2/24/MK8DX_Koopa_Troopa_Icon.png/32px-MK8DX_Koopa_Troopa_Icon.png" title="Koopa Troopa">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
+      <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
           <img src="https://www.mariowiki.com/images/thumb/8/8c/MK8DX_Toadette_Icon.png/32px-MK8DX_Toadette_Icon.png" title="Toadette">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
+      <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
           <img src="https://www.mariowiki.com/images/thumb/8/89/MK8DX_Toad_Icon.png/31px-MK8DX_Toad_Icon.png" title="Toad">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
+      <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
           <img src="https://www.mariowiki.com/images/thumb/f/fc/MK8DX_Cat_Peach_Icon.png/28px-MK8DX_Cat_Peach_Icon.png" title="Cat Peach">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
+      <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
           <img src="https://www.mariowiki.com/images/thumb/1/1f/MK8DX_Peach_Icon.png/32px-MK8DX_Peach_Icon.png" title="Peach">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
+      <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
           <img src="https://www.mariowiki.com/images/thumb/f/f7/MK8DX_Tanooki_Mario_Icon.png/31px-MK8DX_Tanooki_Mario_Icon.png" title="Tanooki Mario">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
+      <a class="thumbVisible" @click="selectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
           <img src="https://www.mariowiki.com/images/thumb/6/69/MK8DX_Luigi_Icon.png/28px-MK8DX_Luigi_Icon.png" title="Luigi">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
+      <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
           <img src="https://www.mariowiki.com/images/thumb/4/4f/MK8DX_Mario_Icon.png/32px-MK8DX_Mario_Icon.png" title="Mario">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
+      <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
           <img src="https://www.mariowiki.com/images/thumb/4/4b/MK8DX_Rosalina_Icon.png/28px-MK8DX_Rosalina_Icon.png" title="Rosalina">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
+      <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
           <img src="https://www.mariowiki.com/images/thumb/5/51/MK8DX_Waluigi_Icon.png/27px-MK8DX_Waluigi_Icon.png" title="Waluigi">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
+      <a class="thumbVisible" @click="selectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
           <img src="https://www.mariowiki.com/images/thumb/c/cd/MK8DX_Wario_Icon.png/32px-MK8DX_Wario_Icon.png" title="Wario">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
+      <a class="thumbVisible" @click="selectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
           <img src="https://www.mariowiki.com/images/thumb/e/eb/MK8DX_Metal_Mario_Icon.png/31px-MK8DX_Metal_Mario_Icon.png" title="Metal Mario">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
+      <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
           <img src="https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Bowser_Icon.png/32px-MK8DX_Bowser_Icon.png" title="Bowser">
         </a>
-  </div>
-  <div class="driver-thumbs-row">
-    <a class="thumbVisible" @click="SelectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
+    </div>
+    <div class="driver-thumbs-row"> <!-- 2nd row -->
+      <a class="thumbVisible" @click="selectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
           <img src="https://www.mariowiki.com/images/thumb/4/43/MK8_BabyDaisy_Icon.png/32px-MK8_BabyDaisy_Icon.png" title="Baby Daisy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
+      <a class="thumbVisible" @click="selectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
           <img src="https://www.mariowiki.com/images/thumb/f/fc/MK8_Lemmy_Icon.png/32px-MK8_Lemmy_Icon.png" title="Lemmy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
+      <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
           <img src="https://www.mariowiki.com/images/thumb/7/75/MK8DX_Baby_Luigi_Icon.png/31px-MK8DX_Baby_Luigi_Icon.png" title="Baby Luigi">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
+      <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
           <img src="https://www.mariowiki.com/images/thumb/6/6f/MK8DX_Lakitu_Icon.png/26px-MK8DX_Lakitu_Icon.png" title="Lakitu">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
+      <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
           <img src="https://www.mariowiki.com/images/thumb/2/2c/MK8DX_Wendy_Icon.png/32px-MK8DX_Wendy_Icon.png" title="Wendy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
+      <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
           <img src="https://www.mariowiki.com/images/thumb/4/43/MK8DX_Shy_Guy_Icon.png/32px-MK8DX_Shy_Guy_Icon.png" title="Shy Guy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
+      <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
           <img src="https://www.mariowiki.com/images/thumb/b/b9/MK8DX_Female_Inkling_Icon.png/32px-MK8DX_Female_Inkling_Icon.png" title="Inkling Girl">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
+      <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
           <img src="https://www.mariowiki.com/images/thumb/6/6e/MK8DX_Daisy_Icon.png/29px-MK8DX_Daisy_Icon.png" title="Daisy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
+      <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
           <img src="https://www.mariowiki.com/images/thumb/3/3c/MK8DX_Male_Inkling_Icon.png/32px-MK8DX_Male_Inkling_Icon.png" title="Inkling Boy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
+      <a class="thumbVisible" @click="selectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
           <img src="https://www.mariowiki.com/images/thumb/d/d7/MK8DX_Iggy_Icon.png/30px-MK8DX_Iggy_Icon.png" title="Iggy">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
+      <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
           <img src="https://www.mariowiki.com/images/thumb/7/7c/MK8DX_Ludwig_Icon.png/32px-MK8DX_Ludwig_Icon.png" title="Ludwig">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
+      <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
           <img src="https://www.mariowiki.com/images/thumb/1/1d/MK8DX_King_Boo_Icon.png/30px-MK8DX_King_Boo_Icon.png" title="King Boo">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
+      <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
           <img src="https://www.mariowiki.com/images/thumb/9/9b/MK8DX_DK_Icon.png/25px-MK8DX_DK_Icon.png" title="Donkey Kong">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
+      <a class="thumbVisible" @click="selectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
           <img src="https://www.mariowiki.com/images/thumb/3/38/MK8DX_Dry_Bowser_Icon.png/32px-MK8DX_Dry_Bowser_Icon.png" title="Dry Bowser">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
+      <a class="thumbVisible" @click="selectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
           <img src="https://www.mariowiki.com/images/thumb/2/2b/MK8DX_Pink_Gold_Peach_Icon.png/31px-MK8DX_Pink_Gold_Peach_Icon.png" title="Pink Gold Peach">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
+      <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
           <img src="https://www.mariowiki.com/images/thumb/4/47/MK8DX_Morton_Icon.png/30px-MK8DX_Morton_Icon.png" title="Morton">
         </a>
-  </div>
-  <div class="driver-thumbs-row">
-    <a class="placeholder">
+    </div>
+    <div class="driver-thumbs-row"> <!-- 3rd row -->
+      <a class="placeholder">
+          <img src="../assets/blank32x32.png"> <!-- Display:none trickery due to jagged wightclass lengths (keeps drivers in correct position) -->
+        </a>
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
-    <a class="thumbVisible" @click="SelectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
+      <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
           <img src="https://www.mariowiki.com/images/thumb/3/3f/MK8DX_Dry_Bones_Icon.png/30px-MK8DX_Dry_Bones_Icon.png" title="Dry Bones">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
+      <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
           <img src="https://www.mariowiki.com/images/thumb/2/26/MK8_Bowser_Jr_Icon.png/31px-MK8_Bowser_Jr_Icon.png" title="Bowser Jr.">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
+      <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
           <img src="https://www.mariowiki.com/images/thumb/5/59/MK8DX_Isabelle_Icon.png/30px-MK8DX_Isabelle_Icon.png" title="Isabelle">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
+      <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
           <img src="https://www.mariowiki.com/images/thumb/c/c2/MK8_Larry_Icon.png/32px-MK8_Larry_Icon.png" title="Larry">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
+      <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
           <img src="https://www.mariowiki.com/images/thumb/0/00/MK8DX_Female_Villager_Icon.png/32px-MK8DX_Female_Villager_Icon.png" title="Villager (female)">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
+      <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
           <img src="https://www.mariowiki.com/images/thumb/3/38/MK8DX_Yoshi_Icon.png/32px-MK8DX_Yoshi_Icon.png" title="Yoshi">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
+      <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
           <img src="https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Male_Villager_Icon.png/32px-MK8DX_Male_Villager_Icon.png" title="Villager (male)">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
+      <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
           <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (medium)">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
+      <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
           <img src="https://www.mariowiki.com/images/thumb/c/ce/MK8DX_Link_Icon.png/32px-MK8DX_Link_Icon.png" title="Link">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
+      <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
           <img src="https://www.mariowiki.com/images/thumb/3/36/MK8DX_Roy_Icon.png/32px-MK8DX_Roy_Icon.png" title="Roy">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
+      <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
           <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (heavy)">
         </a>
-  </div>
-  <div class="driver-thumbs-row">
-    <a class="placeholder">
+    </div>
+    <div class="driver-thumbs-row"> <!-- 4th and final (bottom) row -->
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="thumbVisible" @click="SelectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
+      <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
           <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (light)">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
-    <a class="placeholder">
+      <a class="placeholder">
           <img src="../assets/blank32x32.png">
         </a>
+    </div>
   </div>
-</div>
 
-<!-- Driver chart buttons -->
-<div>
-  <a class="button dr-size-btn is-small is-info" @click="lightDrivers">Light</a>
-  <a class="button dr-size-btn is-small is-primary" @click="mediumDrivers">Medium</a>
-  <a class="button dr-size-btn is-small is-danger" @click="heavyDrivers">Heavy</a>
-  <span>|</span>
-  <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="changeChartType()">Type</a>
-  <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="toggleFilterType()">Mode</a>
-  <a class="button dr-size-btn is-small is-warning" v-if="this.filteredOut.length > 0 && !this.pointFilter" @click="ResetFilteredOut()">Reset</a>
-</div>
+  <!-- Driver chart buttons -->
+  <div>
+    <a class="button dr-size-btn is-small is-info" @click="lightDrivers">Light</a>
+    <a class="button dr-size-btn is-small is-primary" @click="mediumDrivers">Medium</a>
+    <a class="button dr-size-btn is-small is-danger" @click="heavyDrivers">Heavy</a>
+    <span>|</span>
+    <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="changeChartType()">View</a>
+    <a class="button dr-size-btn is-small" style="backgroundColor:#e0e0e0" @click="toggleFilterType()">Mode</a>
+    <a class="button dr-size-btn is-small is-warning" v-if="this.filteredOut.length > 0 && !this.pointFilter" @click="resetFilteredOut()">Reset</a>
+  </div>
 
 </div>
 </template>
+
 <script>
-import BarChart from './BarChart.js'
+import BarChart from './BarChart.js' // Stack chart extends Bar
 import LineChart from './LineChart.js'
 import vueSlider from 'vue-slider-component'
 import * as firebase from "firebase"
@@ -324,7 +326,6 @@ export default {
     'driver-slider': vueSlider,
   },
 
-
   data() {
     return {
       SPEED_COLOR: 'rgb(255, 215, 0)',
@@ -339,8 +340,8 @@ export default {
       AIR_HANDLING_COLOR: 'rgb(187, 219, 155)',
       ANTI_GRAVITY_HANDLING_COLOR: 'rgb(223, 204, 116)',
       MINI_TURBO_COLOR: 'rgb(255, 26, 47)',
-      pointFilter: false,
-      options: [{
+      pointFilter: false, // Mode selector
+      options: [{ // Slider component
         height: 14,
         dotSize: 26,
         min: 1,
@@ -364,7 +365,7 @@ export default {
       showDetailedStats: false,
       filteredOut: [],
       showDriverDropdown: false,
-      chartType: 'bar',
+      chartType: 'bar', // defaults to unstacked bar chart
       isStacked: false,
       ticksMax: 5,
       stepSize: 1,
@@ -381,7 +382,7 @@ export default {
       hideHandlingAntiGravity: true,
       hideTraction: true,
       hideMiniTurbo: true,
-      drivers: [
+      drivers: [ // Stats taken from https://www.mariowiki.com/
         new Driver("Light", 1, "Baby Peach", "https://www.mariowiki.com/images/thumb/3/3d/MK8_BabyPeach_Icon.png/32px-MK8_BabyPeach_Icon.png", 2.25, 2.5, 2.75, 2, 4, 2, 5, 4.5, 5, 5, 4.25, 4),
         new Driver("Light", 1, "Baby Daisy", "https://www.mariowiki.com/images/thumb/4/43/MK8_BabyDaisy_Icon.png/32px-MK8_BabyDaisy_Icon.png", 2.25, 2.5, 2.75, 2, 4, 2, 5, 4.5, 5, 5, 4.25, 4),
         new Driver("Light", 2, "Baby Rosalina", "https://www.mariowiki.com/images/thumb/0/09/MK8_BabyRosalina_Icon.png/32px-MK8_BabyRosalina_Icon.png", 2.25, 2.5, 2.75, 2, 4.25, 2, 4.75, 4.25, 4.75, 4.75, 3.75, 4),
@@ -435,7 +436,7 @@ export default {
       window.addEventListener('resize', this.getWidthChange);
       window.addEventListener('orientationchange', this.getOrientationChange);
 
-      //Init
+      // Needed for mobile users to resize slider component
       this.getWidthChange()
       this.getOrientationChange()
     })
@@ -491,7 +492,7 @@ export default {
       }
     },
 
-    SelectDriver(num) {
+    selectDriver(num) {
       if (!this.pointFilter) {
         if (!this.filteredOut.includes(num)) {
           this.filteredOut.push(num)
@@ -505,13 +506,13 @@ export default {
       } else {
         var dist_0 = Math.abs(this.drSizeFilter[0] - num);
         var dist_1 = Math.abs(this.drSizeFilter[1] - num);
-        var ran = Math.round(Math.random());
-        if (dist_0 < dist_1) {
+        var ran = Math.round(Math.random()); // Random 0 or 1
+        if (dist_0 < dist_1) { // Move to pos 1
           this.drSizeFilter = [num, this.drSizeFilter[1]]
-        } else if (dist_0 > dist_1) {
+        } else if (dist_0 > dist_1) { // Move to pos 0
           this.drSizeFilter = [this.drSizeFilter[0], num]
-        } else if (dist_0 === dist_1) {
-          if (ran === 0){
+        } else if (dist_0 === dist_1) { // Move to pos 0 or pos 1
+          if (ran === 0) {
             this.drSizeFilter = [num, this.drSizeFilter[1]]
           } else {
             this.drSizeFilter = [this.drSizeFilter[0], num]
@@ -520,7 +521,7 @@ export default {
       }
     },
 
-    ResetFilteredOut() {
+    resetFilteredOut() {
       this.filteredOut = [];
     },
 
@@ -535,19 +536,20 @@ export default {
       }
       this.$refs.slider.refresh()
     },
-    allDrivers() {
-      this.drSizeFilter = [1, 16]
-    },
+
     lightDrivers() {
       this.drSizeFilter = [1, 6]
     },
+
     mediumDrivers() {
       this.drSizeFilter = [7, 11]
     },
+
     heavyDrivers() {
       this.drSizeFilter = [12, 16]
     },
-    ToggleData(num) {
+
+    toggleData(num) {
       switch (num) {
         case 1:
           this.hideSpeedGround = !this.hideSpeedGround;
@@ -589,14 +591,12 @@ export default {
     },
 
     filterDriver(num) {
-
       if (this.pointFilter) {
         if (this.drSizeFilter.includes(num))
           return false;
         else {
           return true;
         }
-
       } else {
         if (num < this.drSizeFilter[0] || num > this.drSizeFilter[1] || this.filteredOut.includes(num)) {
           return true;
@@ -604,12 +604,12 @@ export default {
           return false;
         }
       }
-
     },
   },
+
   computed: {
 
-    DrawChart() {
+    drawChart() {
       var opt = {
         responsive: true,
         maintainAspectRatio: false,
@@ -683,15 +683,12 @@ export default {
           if (this.drSizeFilter.includes(i)) {
             weightClasses.push(i)
           }
-
         } else {
           if (!this.filteredOut.includes(i)) {
             weightClasses.push(i)
           }
         }
       }
-
-
 
       let dataSet1 = []
       for (var i = 0; i <= weightClasses.length; i++) {
@@ -802,7 +799,6 @@ export default {
         }
       }
 
-
       var dat = {
         labels: weightClasses,
         datasets: [{
@@ -906,6 +902,7 @@ export default {
 
       return [dat, opt];
     },
+
     driverList() {
       return this.drivers.filter((driver) => {
         return driver.weightClass >= this.drSizeFilter[0] && driver.weightClass <= this.drSizeFilter[1]
@@ -919,7 +916,7 @@ export default {
 @import '../mq'
 
 #driver-slider
-  user-select:none
+  user-select: none
   margin-top: 30px
 
 .dr-chart
@@ -966,7 +963,6 @@ export default {
   box-shadow: 0 0 0 !important
   transform: translateY(2px)
 
-
 .stat-btn
   font-size: 0.7rem
   padding: 2px
@@ -988,11 +984,12 @@ export default {
 
 .thumbVisible
   opacity: 1
-  transition: opacity .15s ease-in-out
+  transition: all .15s ease-in-out
 
 .thumbHidden
   opacity: 0.25
-  transition: opacity .15s ease-in-out
+  transition: all .15s ease-in-out
+  transform: scale(0.8)
 
 .placeholder
   visibility: hidden
@@ -1053,6 +1050,5 @@ export default {
 .slide-fade-enter, .slide-fade-leave-to
   transform: translateX(200px)
   opacity: 0
-
 
 </style>
