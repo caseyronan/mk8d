@@ -2,11 +2,11 @@
 <div class="driver">
 
   <!-- Three chart types -->
-  <bar-chart class="dr-chart" v-if="this.chartType==='bar'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
+  <bar-chart class="dr-chart" v-if="this.chartType==='bar'" :height="this.chartHeight" :chart-data="drawChart[0]" :options="drawChart[1]">
   </bar-chart>
-  <line-chart class="dr-chart" v-if="this.chartType==='line'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
+  <line-chart class="dr-chart" v-if="this.chartType==='line'" :height="this.chartHeight" :chart-data="drawChart[0]" :options="drawChart[1]">
   </line-chart>
-  <stacked-chart class="dr-chart" v-if="this.chartType==='stacked'" :height="300" :chart-data="drawChart[0]" :options="drawChart[1]">
+  <stacked-chart class="dr-chart" v-if="this.chartType==='stacked'" :height="this.chartHeight" :chart-data="drawChart[0]" :options="drawChart[1]">
   </stacked-chart>
 
   <!-- Basic driver stats -->
@@ -43,8 +43,8 @@
         <div class="driver-slider-label has-text-centered">
           <span v-if="!isFilteredOut(label.label)">
             <span v-if="label.label < 7" class="lightLabelDriver">{{ label.label }}</span>
-            <span v-if="label.label >= 7 && label.label < 12" class="mediumLabelDriver">{{ label.label }}</span>
-            <span v-if="label.label >= 12" class="heavyLabelDriver">{{ label.label }}</span>
+            <span v-if="label.label >= 7 && label.label < 13" class="mediumLabelDriver">{{ label.label }}</span>
+            <span v-if="label.label >= 13" class="heavyLabelDriver">{{ label.label }}</span>
           </span>
           <span v-else style="color:#e0e0e0">{{ label.label }}</span>
         </div>
@@ -52,8 +52,8 @@
     <template slot="tooltip" scope="tooltip"> <!-- Custom color coded tooltips -->
       <div class="has-text-centered">
         <span v-if="tooltip.value < 7" class="is-light-bg toolTipDriver">{{tooltip.value}}</span>
-        <span v-if="tooltip.value >= 7 && tooltip.value < 12" class="is-medium-bg toolTipDriver">{{tooltip.value}}</span>
-        <span v-if="tooltip.value >= 12" class="is-heavy-bg toolTipDriver">{{tooltip.value}}</span>
+        <span v-if="tooltip.value >= 7 && tooltip.value < 13" class="is-medium-bg toolTipDriver">{{tooltip.value}}</span>
+        <span v-if="tooltip.value >= 13" class="is-heavy-bg toolTipDriver">{{tooltip.value}}</span>
      </div>
     </template>
     <br>
@@ -63,203 +63,203 @@
   <div class="driver-thumbs">
     <div class="driver-thumbs-row">  <!-- 1st (top) row -->
       <a class="thumbVisible" @click="selectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/3d/MK8_BabyPeach_Icon.png/32px-MK8_BabyPeach_Icon.png" title= "Baby Peach">
-        </a>
+        <img :src="this.drivers[0].image" v-bind:title="this.drivers[0].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
-          <img src="https://www.mariowiki.com/images/thumb/0/09/MK8_BabyRosalina_Icon.png/32px-MK8_BabyRosalina_Icon.png" title="Baby Rosalina">
-        </a>
+        <img :src="this.drivers[2].image" v-bind:title="this.drivers[2].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(3) " v-bind:class="{ thumbHidden: filterDriver(3) }">
-          <img src="https://www.mariowiki.com/images/thumb/5/51/MK8DX_Baby_Mario_Icon.png/32px-MK8DX_Baby_Mario_Icon.png" title="Baby Mario">
-        </a>
+        <img :src="this.drivers[4].image" v-bind:title="this.drivers[4].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
-          <img src="https://www.mariowiki.com/images/thumb/2/24/MK8DX_Koopa_Troopa_Icon.png/32px-MK8DX_Koopa_Troopa_Icon.png" title="Koopa Troopa">
-        </a>
+        <img :src="this.drivers[8].image" v-bind:title="this.drivers[8].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
-          <img src="https://www.mariowiki.com/images/thumb/8/8c/MK8DX_Toadette_Icon.png/32px-MK8DX_Toadette_Icon.png" title="Toadette">
-        </a>
+        <img :src="this.drivers[11].image" v-bind:title="this.drivers[11].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
-          <img src="https://www.mariowiki.com/images/thumb/8/89/MK8DX_Toad_Icon.png/31px-MK8DX_Toad_Icon.png" title="Toad">
-        </a>
+        <img :src="this.drivers[14].image" v-bind:title="this.drivers[14].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
-          <img src="https://www.mariowiki.com/images/thumb/f/fc/MK8DX_Cat_Peach_Icon.png/28px-MK8DX_Cat_Peach_Icon.png" title="Cat Peach">
-        </a>
+        <img :src="this.drivers[17].image" v-bind:title="this.drivers[17].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
-          <img src="https://www.mariowiki.com/images/thumb/1/1f/MK8DX_Peach_Icon.png/32px-MK8DX_Peach_Icon.png" title="Peach">
-        </a>
+        <img :src="this.drivers[20].image" v-bind:title="this.drivers[20].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
-          <img src="https://www.mariowiki.com/images/thumb/f/f7/MK8DX_Tanooki_Mario_Icon.png/31px-MK8DX_Tanooki_Mario_Icon.png" title="Tanooki Mario">
+        <img :src="this.drivers[23].image" v-bind:title="this.drivers[23].name">
         </a>
       <a class="thumbVisible" @click="selectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
-          <img src="https://www.mariowiki.com/images/thumb/6/69/MK8DX_Luigi_Icon.png/28px-MK8DX_Luigi_Icon.png" title="Luigi">
+        <img :src="this.drivers[26].image" v-bind:title="this.drivers[26].name">
         </a>
       <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
-          <img src="https://www.mariowiki.com/images/thumb/4/4f/MK8DX_Mario_Icon.png/32px-MK8DX_Mario_Icon.png" title="Mario">
+        <img :src="this.drivers[28].image" v-bind:title="this.drivers[28].name">
         </a>
       <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
-          <img src="https://www.mariowiki.com/images/thumb/4/4b/MK8DX_Rosalina_Icon.png/28px-MK8DX_Rosalina_Icon.png" title="Rosalina">
+        <img :src="this.drivers[31].image" v-bind:title="this.drivers[31].name">
         </a>
       <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
-          <img src="https://www.mariowiki.com/images/thumb/5/51/MK8DX_Waluigi_Icon.png/27px-MK8DX_Waluigi_Icon.png" title="Waluigi">
-        </a>
+        <img :src="this.drivers[33].image" v-bind:title="this.drivers[33].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
-          <img src="https://www.mariowiki.com/images/thumb/c/cd/MK8DX_Wario_Icon.png/32px-MK8DX_Wario_Icon.png" title="Wario">
-        </a>
+        <img :src="this.drivers[36].image" v-bind:title="this.drivers[36].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
-          <img src="https://www.mariowiki.com/images/thumb/e/eb/MK8DX_Metal_Mario_Icon.png/31px-MK8DX_Metal_Mario_Icon.png" title="Metal Mario">
-        </a>
+        <img :src="this.drivers[39].image" v-bind:title="this.drivers[39].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
-          <img src="https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Bowser_Icon.png/32px-MK8DX_Bowser_Icon.png" title="Bowser">
-        </a>
+        <img :src="this.drivers[41].image" v-bind:title="this.drivers[41].name">
+      </a>
     </div>
     <div class="driver-thumbs-row"> <!-- 2nd row -->
       <a class="thumbVisible" @click="selectDriver(1)" v-bind:class="{ thumbHidden: filterDriver(1) }">
-          <img src="https://www.mariowiki.com/images/thumb/4/43/MK8_BabyDaisy_Icon.png/32px-MK8_BabyDaisy_Icon.png" title="Baby Daisy">
-        </a>
+        <img :src="this.drivers[1].image" v-bind:title="this.drivers[1].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(2)" v-bind:class="{ thumbHidden: filterDriver(2) }">
-          <img src="https://www.mariowiki.com/images/thumb/f/fc/MK8_Lemmy_Icon.png/32px-MK8_Lemmy_Icon.png" title="Lemmy">
-        </a>
+        <img :src="this.drivers[3].image" v-bind:title="this.drivers[3].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
-          <img src="https://www.mariowiki.com/images/thumb/7/75/MK8DX_Baby_Luigi_Icon.png/31px-MK8DX_Baby_Luigi_Icon.png" title="Baby Luigi">
-        </a>
+        <img :src="this.drivers[5].image" v-bind:title="this.drivers[5].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
-          <img src="https://www.mariowiki.com/images/thumb/6/6f/MK8DX_Lakitu_Icon.png/26px-MK8DX_Lakitu_Icon.png" title="Lakitu">
-        </a>
+        <img :src="this.drivers[9].image" v-bind:title="this.drivers[9].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
-          <img src="https://www.mariowiki.com/images/thumb/2/2c/MK8DX_Wendy_Icon.png/32px-MK8DX_Wendy_Icon.png" title="Wendy">
-        </a>
+        <img :src="this.drivers[12].image" v-bind:title="this.drivers[12].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
-          <img src="https://www.mariowiki.com/images/thumb/4/43/MK8DX_Shy_Guy_Icon.png/32px-MK8DX_Shy_Guy_Icon.png" title="Shy Guy">
-        </a>
+        <img :src="this.drivers[15].image" v-bind:title="this.drivers[15].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
-          <img src="https://www.mariowiki.com/images/thumb/b/b9/MK8DX_Female_Inkling_Icon.png/32px-MK8DX_Female_Inkling_Icon.png" title="Inkling Girl">
-        </a>
+        <img :src="this.drivers[18].image" v-bind:title="this.drivers[18].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
-          <img src="https://www.mariowiki.com/images/thumb/6/6e/MK8DX_Daisy_Icon.png/29px-MK8DX_Daisy_Icon.png" title="Daisy">
-        </a>
+        <img :src="this.drivers[21].image" v-bind:title="this.drivers[21].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/3c/MK8DX_Male_Inkling_Icon.png/32px-MK8DX_Male_Inkling_Icon.png" title="Inkling Boy">
-        </a>
+        <img :src="this.drivers[24].image" v-bind:title="this.drivers[24].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(10)" v-bind:class="{ thumbHidden: filterDriver(10) }">
-          <img src="https://www.mariowiki.com/images/thumb/d/d7/MK8DX_Iggy_Icon.png/30px-MK8DX_Iggy_Icon.png" title="Iggy">
-        </a>
+        <img :src="this.drivers[27].image" v-bind:title="this.drivers[27].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
-          <img src="https://www.mariowiki.com/images/thumb/7/7c/MK8DX_Ludwig_Icon.png/32px-MK8DX_Ludwig_Icon.png" title="Ludwig">
-        </a>
+        <img :src="this.drivers[29].image" v-bind:title="this.drivers[29].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
-          <img src="https://www.mariowiki.com/images/thumb/1/1d/MK8DX_King_Boo_Icon.png/30px-MK8DX_King_Boo_Icon.png" title="King Boo">
-        </a>
+        <img :src="this.drivers[32].image" v-bind:title="this.drivers[32].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
-          <img src="https://www.mariowiki.com/images/thumb/9/9b/MK8DX_DK_Icon.png/25px-MK8DX_DK_Icon.png" title="Donkey Kong">
-        </a>
+        <img :src="this.drivers[34].image" v-bind:title="this.drivers[34].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/38/MK8DX_Dry_Bowser_Icon.png/32px-MK8DX_Dry_Bowser_Icon.png" title="Dry Bowser">
-        </a>
+        <img :src="this.drivers[37].image" v-bind:title="this.drivers[37].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(15)" v-bind:class="{ thumbHidden: filterDriver(15) }">
-          <img src="https://www.mariowiki.com/images/thumb/2/2b/MK8DX_Pink_Gold_Peach_Icon.png/31px-MK8DX_Pink_Gold_Peach_Icon.png" title="Pink Gold Peach">
-        </a>
+        <img :src="this.drivers[40].image" v-bind:title="this.drivers[40].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
-          <img src="https://www.mariowiki.com/images/thumb/4/47/MK8DX_Morton_Icon.png/30px-MK8DX_Morton_Icon.png" title="Morton">
-        </a>
+        <img :src="this.drivers[42].image" v-bind:title="this.drivers[42].name">
+      </a>
     </div>
     <div class="driver-thumbs-row"> <!-- 3rd row -->
       <a class="placeholder">
-          <img src="../assets/blank32x32.png"> <!-- Display:none trickery due to jagged wightclass lengths (keeps drivers in correct position) -->
-        </a>
+        <img src="../assets/blank32x32.png"> <!-- Display:none trickery due to jagged wightclass lengths (keeps drivers in correct position) -->
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/3f/MK8DX_Dry_Bones_Icon.png/30px-MK8DX_Dry_Bones_Icon.png" title="Dry Bones">
-        </a>
+        <img :src="this.drivers[6].image" v-bind:title="this.drivers[6].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(4)" v-bind:class="{ thumbHidden: filterDriver(4) }">
-          <img src="https://www.mariowiki.com/images/thumb/2/26/MK8_Bowser_Jr_Icon.png/31px-MK8_Bowser_Jr_Icon.png" title="Bowser Jr.">
-        </a>
+        <img :src="this.drivers[10].image" v-bind:title="this.drivers[10].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(5)" v-bind:class="{ thumbHidden: filterDriver(5) }">
-          <img src="https://www.mariowiki.com/images/thumb/5/59/MK8DX_Isabelle_Icon.png/30px-MK8DX_Isabelle_Icon.png" title="Isabelle">
-        </a>
+        <img :src="this.drivers[13].image" v-bind:title="this.drivers[13].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(6)" v-bind:class="{ thumbHidden: filterDriver(6) }">
-          <img src="https://www.mariowiki.com/images/thumb/c/c2/MK8_Larry_Icon.png/32px-MK8_Larry_Icon.png" title="Larry">
-        </a>
+        <img :src="this.drivers[16].image" v-bind:title="this.drivers[16].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(7)" v-bind:class="{ thumbHidden: filterDriver(7) }">
-          <img src="https://www.mariowiki.com/images/thumb/0/00/MK8DX_Female_Villager_Icon.png/32px-MK8DX_Female_Villager_Icon.png" title="Villager (female)">
-        </a>
+        <img :src="this.drivers[19].image" v-bind:title="this.drivers[19].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(8)" v-bind:class="{ thumbHidden: filterDriver(8) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/38/MK8DX_Yoshi_Icon.png/32px-MK8DX_Yoshi_Icon.png" title="Yoshi">
-        </a>
+        <img :src="this.drivers[22].image" v-bind:title="this.drivers[22].name">
+      </a>
       <a class="thumbVisible" @click="selectDriver(9)" v-bind:class="{ thumbHidden: filterDriver(9) }">
-          <img src="https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Male_Villager_Icon.png/32px-MK8DX_Male_Villager_Icon.png" title="Villager (male)">
-        </a>
+        <img :src="this.drivers[25].image" v-bind:title="this.drivers[25].name">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="thumbVisible" @click="selectDriver(11)" v-bind:class="{ thumbHidden: filterDriver(11) }">
-          <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (medium)">
-        </a>
-      <a class="thumbVisible" @click="selectDriver(12)" v-bind:class="{ thumbHidden: filterDriver(12) }">
-          <img src="https://www.mariowiki.com/images/thumb/c/ce/MK8DX_Link_Icon.png/32px-MK8DX_Link_Icon.png" title="Link">
-        </a>
+        <img :src="this.drivers[30].image" v-bind:title="this.drivers[30].name">
+      </a>
+      <a class="placeholder">
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="thumbVisible" @click="selectDriver(13)" v-bind:class="{ thumbHidden: filterDriver(13) }">
-          <img src="https://www.mariowiki.com/images/thumb/3/36/MK8DX_Roy_Icon.png/32px-MK8DX_Roy_Icon.png" title="Roy">
-        </a>
+        <img :src="this.drivers[35].image" v-bind:title="this.drivers[35].name">
+      </a>
+      <a class="thumbVisible" @click="selectDriver(14)" v-bind:class="{ thumbHidden: filterDriver(14) }">
+        <img :src="this.drivers[38].image" v-bind:title="this.drivers[38].name">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
-      <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="thumbVisible" @click="selectDriver(16)" v-bind:class="{ thumbHidden: filterDriver(16) }">
-          <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (heavy)">
-        </a>
+        <img :src="this.drivers[43].image" v-bind:title="this.drivers[43].name">
+      </a>
     </div>
     <div class="driver-thumbs-row"> <!-- 4th and final (bottom) row -->
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="thumbVisible" @click="selectDriver(3)" v-bind:class="{ thumbHidden: filterDriver(3) }">
-          <img src="https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png" title="Mii (light)">
-        </a>
+        <img :src="this.drivers[7].image" v-bind:title="this.drivers[7].name">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
       <a class="placeholder">
-          <img src="../assets/blank32x32.png">
-        </a>
+        <img src="../assets/blank32x32.png">
+      </a>
     </div>
   </div>
 
@@ -340,6 +340,7 @@ export default {
       AIR_HANDLING_COLOR: 'rgb(187, 219, 155)',
       ANTI_GRAVITY_HANDLING_COLOR: 'rgb(223, 204, 116)',
       MINI_TURBO_COLOR: 'rgb(255, 26, 47)',
+      chartHeight: 250,
       pointFilter: false, // Mode selector
       options: [{ // Slider component
         height: 14,
@@ -389,11 +390,11 @@ export default {
         new Driver("Light", 2, "Lemmy", "https://www.mariowiki.com/images/thumb/f/fc/MK8_Lemmy_Icon.png/32px-MK8_Lemmy_Icon.png", 2.25, 2.5, 2.75, 2, 4.25, 2, 4.75, 4.25, 4.75, 4.75, 3.75, 4),
         new Driver("Light", 3, "Baby Mario", "https://www.mariowiki.com/images/thumb/5/51/MK8DX_Baby_Mario_Icon.png/32px-MK8DX_Baby_Mario_Icon.png", 2.5, 2.75, 3, 2.25, 4.25, 2.25, 4.5, 4, 4.5, 4.5, 4, 3.75),
         new Driver("Light", 3, "Baby Luigi", "https://www.mariowiki.com/images/thumb/7/75/MK8DX_Baby_Luigi_Icon.png/31px-MK8DX_Baby_Luigi_Icon.png", 2.5, 2.75, 3, 2.25, 4.25, 2.25, 4.5, 4, 4.5, 4.5, 4, 3.75),
-        new Driver("Light", 3, "Dry Bones", "https://www.mariowiki.com/images/thumb/3/3f/MK8DX_Dry_Bones_Icon.png/30px-MK8DX_Dry_Bones_Icon.png", 2.5, 2.75, 3, 2.25, 4.25, 2.25, 4.5, 4, 4.5, 4.5, 4, 3.75),
+        new Driver("Light", 3, "Dry Bones", "https://www.mariowiki.com/images/thumb/3/3f/MK8DX_Dry_Bones_Icon.png/32px-MK8DX_Dry_Bones_Icon.png", 2.5, 2.75, 3, 2.25, 4.25, 2.25, 4.5, 4, 4.5, 4.5, 4, 3.75),
         new Driver("Light", 3, "Mii (light)", "https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png", 2.5, 2.75, 3, 2.25, 4.25, 2.25, 4.5, 4, 4.5, 4.5, 4, 3.75),
         new Driver("Light", 4, "Koopa Troopa", "https://www.mariowiki.com/images/thumb/2/24/MK8DX_Koopa_Troopa_Icon.png/32px-MK8DX_Koopa_Troopa_Icon.png", 2.75, 3, 3.25, 2.5, 4, 2.5, 4.5, 4, 4.5, 4.5, 4.25, 3.75),
         new Driver("Light", 4, "Lakitu", "https://www.mariowiki.com/images/thumb/6/6f/MK8DX_Lakitu_Icon.png/26px-MK8DX_Lakitu_Icon.png", 2.75, 3, 3.25, 2.5, 4, 2.5, 4.5, 4, 4.5, 4.5, 4.25, 3.75),
-        new Driver("Light", 4, "Bowser Jr.", "https://www.mariowiki.com/images/thumb/2/26/MK8_Bowser_Jr_Icon.png/31px-MK8_Bowser_Jr_Icon.png", 2.75, 3, 3.25, 2.5, 4, 2.5, 4.5, 4, 4.5, 4.5, 4.25, 3.75),
+        new Driver("Light", 4, "Bowser Jr.", "https://www.mariowiki.com/images/thumb/2/26/MK8_Bowser_Jr_Icon.png/32px-MK8_Bowser_Jr_Icon.png", 2.75, 3, 3.25, 2.5, 4, 2.5, 4.5, 4, 4.5, 4.5, 4.25, 3.75),
         new Driver("Light", 5, "Toadette", "https://www.mariowiki.com/images/thumb/8/8c/MK8DX_Toadette_Icon.png/32px-MK8DX_Toadette_Icon.png", 2.75, 3, 3.25, 2.5, 4.25, 2.5, 4.25, 3.75, 4.25, 4.25, 3.5, 3.75),
         new Driver("Light", 5, "Wendy", "https://www.mariowiki.com/images/thumb/2/2c/MK8DX_Wendy_Icon.png/32px-MK8DX_Wendy_Icon.png", 2.75, 3, 3.25, 2.5, 4.25, 2.5, 4.25, 3.75, 4.25, 4.25, 3.5, 3.75),
         new Driver("Light", 5, "Isabelle", "https://www.mariowiki.com/images/thumb/5/59/MK8DX_Isabelle_Icon.png/30px-MK8DX_Isabelle_Icon.png", 2.75, 3, 3.25, 2.5, 4.25, 2.5, 4.25, 3.75, 4.25, 4.25, 3.5, 3.75),
@@ -411,19 +412,21 @@ export default {
         new Driver("Medium", 9, "Villager (male)", "https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Male_Villager_Icon.png/32px-MK8DX_Male_Villager_Icon.png", 3.5, 3.75, 4, 3.25, 3.75, 3.25, 3.75, 3.25, 3.75, 3.75, 3.25, 3.5),
         new Driver("Medium", 10, "Luigi", "https://www.mariowiki.com/images/thumb/6/69/MK8DX_Luigi_Icon.png/28px-MK8DX_Luigi_Icon.png", 3.75, 4, 4.25, 3.5, 3.5, 3.5, 3.75, 3.25, 3.75, 3.75, 3.25, 3.25),
         new Driver("Medium", 10, "Iggy", "https://www.mariowiki.com/images/thumb/d/d7/MK8DX_Iggy_Icon.png/30px-MK8DX_Iggy_Icon.png", 3.75, 4, 4.25, 3.5, 3.5, 3.5, 3.75, 3.25, 3.75, 3.75, 3.25, 3.25),
+
         new Driver("Medium", 11, "Mario", "https://www.mariowiki.com/images/thumb/4/4f/MK8DX_Mario_Icon.png/32px-MK8DX_Mario_Icon.png", 3.75, 4, 4.25, 3.5, 3.5, 3.5, 3.5, 3, 3.5, 3.5, 3.5, 3.25),
         new Driver("Medium", 11, "Ludwig", "https://www.mariowiki.com/images/thumb/7/7c/MK8DX_Ludwig_Icon.png/32px-MK8DX_Ludwig_Icon.png", 3.75, 4, 4.25, 3.5, 3.5, 3.5, 3.5, 3, 3.5, 3.5, 3.5, 3.25),
         new Driver("Medium", 11, "Mii (medium)", "https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png", 3.75, 4, 4.25, 3.5, 3.5, 3.5, 3.5, 3, 3.5, 3.5, 3.5, 3.25),
-        new Driver("Heavy", 12, "Rosalina", "https://www.mariowiki.com/images/thumb/4/4b/MK8DX_Rosalina_Icon.png/28px-MK8DX_Rosalina_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
-        new Driver("Heavy", 12, "King Boo", "https://www.mariowiki.com/images/thumb/1/1d/MK8DX_King_Boo_Icon.png/30px-MK8DX_King_Boo_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
-        new Driver("Heavy", 12, "Link", "https://www.mariowiki.com/images/thumb/c/ce/MK8DX_Link_Icon.png/32px-MK8DX_Link_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
-        new Driver("Heavy", 13, "Waluigi", "https://www.mariowiki.com/images/thumb/5/51/MK8DX_Waluigi_Icon.png/27px-MK8DX_Waluigi_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
-        new Driver("Heavy", 13, "Donkey Kong", "https://www.mariowiki.com/images/thumb/9/9b/MK8DX_DK_Icon.png/25px-MK8DX_DK_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
-        new Driver("Heavy", 13, "Roy", "https://www.mariowiki.com/images/thumb/3/36/MK8DX_Roy_Icon.png/32px-MK8DX_Roy_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
-        new Driver("Heavy", 14, "Wario", "https://www.mariowiki.com/images/thumb/c/cd/MK8DX_Wario_Icon.png/32px-MK8DX_Wario_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.25, 2.75, 2.25, 2.75, 2.75, 3.25, 2.75),
-        new Driver("Heavy", 14, "Dry Bowser", "https://www.mariowiki.com/images/thumb/3/38/MK8DX_Dry_Bowser_Icon.png/32px-MK8DX_Dry_Bowser_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.25, 2.75, 2.25, 2.75, 2.75, 3.25, 2.75),
-        new Driver("Heavy", 15, "Metal Mario", "https://www.mariowiki.com/images/thumb/e/eb/MK8DX_Metal_Mario_Icon.png/31px-MK8DX_Metal_Mario_Icon.png", 4.25, 4.5, 4.75, 4, 3.25, 4.5, 3.25, 2.75, 3.25, 3.25, 3.25, 3),
-        new Driver("Heavy", 15, "Pink Gold Peach", "https://www.mariowiki.com/images/thumb/2/2b/MK8DX_Pink_Gold_Peach_Icon.png/31px-MK8DX_Pink_Gold_Peach_Icon.png", 4.25, 4.5, 4.75, 4, 3.25, 4.5, 3.25, 2.75, 3.25, 3.25, 3.25, 3),
+
+        new Driver("Medium", 12, "Metal Mario", "https://www.mariowiki.com/images/thumb/e/eb/MK8DX_Metal_Mario_Icon.png/31px-MK8DX_Metal_Mario_Icon.png", 4.25, 4.5, 4.75, 4, 3.25, 4.5, 3.25, 2.75, 3.25, 3.25, 3.25, 3),
+        new Driver("Medium", 12, "Pink Gold Peach", "https://www.mariowiki.com/images/thumb/2/2b/MK8DX_Pink_Gold_Peach_Icon.png/31px-MK8DX_Pink_Gold_Peach_Icon.png", 4.25, 4.5, 4.75, 4, 3.25, 4.5, 3.25, 2.75, 3.25, 3.25, 3.25, 3),
+        new Driver("Heavy", 13, "Rosalina", "https://www.mariowiki.com/images/thumb/4/4b/MK8DX_Rosalina_Icon.png/28px-MK8DX_Rosalina_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
+        new Driver("Heavy", 13, "King Boo", "https://www.mariowiki.com/images/thumb/1/1d/MK8DX_King_Boo_Icon.png/32px-MK8DX_King_Boo_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
+        new Driver("Heavy", 13, "Link", "https://www.mariowiki.com/images/thumb/c/ce/MK8DX_Link_Icon.png/32px-MK8DX_Link_Icon.png", 4, 4.25, 4.5, 3.75, 3.25, 3.75, 3.25, 2.75, 3.25, 3.25, 3.75, 3.25),
+        new Driver("Heavy", 14, "Waluigi", "https://www.mariowiki.com/images/thumb/5/51/MK8DX_Waluigi_Icon.png/27px-MK8DX_Waluigi_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
+        new Driver("Heavy", 14, "Donkey Kong", "https://www.mariowiki.com/images/thumb/9/9b/MK8DX_DK_Icon.png/25px-MK8DX_DK_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
+        new Driver("Heavy", 14, "Roy", "https://www.mariowiki.com/images/thumb/3/36/MK8DX_Roy_Icon.png/32px-MK8DX_Roy_Icon.png", 4.5, 4.75, 5, 4.25, 3.25, 4, 3, 2.5, 3, 3, 3, 3),
+        new Driver("Heavy", 15, "Wario", "https://www.mariowiki.com/images/thumb/c/cd/MK8DX_Wario_Icon.png/32px-MK8DX_Wario_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.25, 2.75, 2.25, 2.75, 2.75, 3.25, 2.75),
+        new Driver("Heavy", 15, "Dry Bowser", "https://www.mariowiki.com/images/thumb/3/38/MK8DX_Dry_Bowser_Icon.png/32px-MK8DX_Dry_Bowser_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.25, 2.75, 2.25, 2.75, 2.75, 3.25, 2.75),
         new Driver("Heavy", 16, "Bowser", "https://www.mariowiki.com/images/thumb/d/d9/MK8DX_Bowser_Icon.png/32px-MK8DX_Bowser_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.5, 2.5, 2, 2.5, 2.5, 3, 2.75),
         new Driver("Heavy", 16, "Morton", "https://www.mariowiki.com/images/thumb/4/47/MK8DX_Morton_Icon.png/30px-MK8DX_Morton_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.5, 2.5, 2, 2.5, 2.5, 3, 2.75),
         new Driver("Heavy", 16, "Mii (heavy)", "https://www.mariowiki.com/images/thumb/9/96/MK8DX_Mii_Icon.png/32px-MK8DX_Mii_Icon.png", 4.75, 5, 5.25, 4.5, 3, 4.5, 2.5, 2, 2.5, 2.5, 3, 2.75),
@@ -542,11 +545,11 @@ export default {
     },
 
     mediumDrivers() {
-      this.drSizeFilter = [7, 11]
+      this.drSizeFilter = [7, 12]
     },
 
     heavyDrivers() {
-      this.drSizeFilter = [12, 16]
+      this.drSizeFilter = [13, 16]
     },
 
     toggleData(num) {
@@ -974,7 +977,6 @@ export default {
 .driver-thumbs
   margin-top: 30px
   margin-bottom: 10px
-  user-select: none
 
 .driver-thumbs-row
   display: flex
@@ -985,6 +987,7 @@ export default {
 .thumbVisible
   opacity: 1
   transition: all .15s ease-in-out
+  user-select: none
 
 .thumbHidden
   opacity: 0.25
